@@ -1,7 +1,9 @@
 package br.edu.ifce.retromarket.controllers;
 
+import br.edu.ifce.retromarket.dtos.AnuncioResponseDTO;
+import br.edu.ifce.retromarket.entities.Anuncio;
 import br.edu.ifce.retromarket.entities.Completude;
-import br.edu.ifce.retromarket.repositories.CompletudeRepository;
+import br.edu.ifce.retromarket.services.AnuncioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,16 +15,21 @@ import java.util.List;
 public class AnuncioController {
 
     @Autowired
-    private CompletudeRepository completudeRepository;
+    private AnuncioService service;
 
     @GetMapping("/completudes")
     public List<Completude> buscarCompletudes(){
-        return completudeRepository.findAll();
+        return service.buscarCompletudes();
     }
 
     @PostMapping("/completudes")
     @ResponseStatus(HttpStatus.CREATED)
     public Completude criarCompletude(@RequestBody Completude completude){
-        return completudeRepository.save(completude);
+        return service.criarCompletude(completude);
+    }
+
+    @GetMapping
+    public List<AnuncioResponseDTO> listarAnuncios(){
+        return service.listarAnuncios();
     }
 }

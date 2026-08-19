@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -57,8 +58,7 @@ public class Anuncio {
   @Column(name = "titulo", length = 150, nullable = false)
   private String titulo;
 
-  @Lob
-  @Column(name = "descricao")
+  @Column(name = "descricao", columnDefinition = "TEXT")
   private String descricao;
 
   @Column(name = "preco", precision = 12, scale = 2, nullable = false)
